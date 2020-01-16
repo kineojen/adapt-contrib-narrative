@@ -10,7 +10,7 @@ define([
     _isInitial: true,
 
     events: {
-      'click .js-narrative-strapline-open-popup': 'openPopup',
+      // 'click .js-narrative-strapline-open-popup': 'openPopup',
       'click .js-narrative-controls-click': 'onNavigationClicked',
       'click .js-narrative-progress-click': 'onProgressClicked'
     },
@@ -18,7 +18,7 @@ define([
     preRender: function() {
       this.listenTo(Adapt, {
         'device:changed device:resize': this.reRender,
-        'notify:closed': this.closeNotify
+        // 'notify:closed': this.closeNotify
       });
       this.renderMode();
 
@@ -97,9 +97,9 @@ define([
 
       this.calculateWidths();
 
-      if (!this.isLargeMode() && !this.model.get('_wasHotgraphic')) {
-        this.replaceInstructions();
-      }
+      // if (!this.isLargeMode() && !this.model.get('_wasHotgraphic')) {
+      //   this.replaceInstructions();
+      // }
       this.setupEventListeners();
       this._isInitial = false;
     },
@@ -115,60 +115,61 @@ define([
     resizeControl: function() {
       var previousMode = this.model.get('_mode');
       this.renderMode();
-      if (previousMode !== this.model.get('_mode')) this.replaceInstructions();
+      // if (previousMode !== this.model.get('_mode')) this.replaceInstructions();
       this.evaluateNavigation();
       var activeItem = this.model.getActiveItem();
       if (activeItem) this.setStage(activeItem);
     },
 
     reRender: function() {
-      if (this.model.get('_wasHotgraphic') && this.isLargeMode()) {
-        this.replaceWithHotgraphic();
-      } else {
+    //   if (this.model.get('_wasHotgraphic') && this.isLargeMode()) {
+    //     // this.replaceWithHotgraphic();
+    //     return;
+    //   } else {
         this.resizeControl();
-      }
+      // }
     },
 
-    closeNotify: function() {
-      this.evaluateCompletion();
-    },
+    // closeNotify: function() {
+    //   this.evaluateCompletion();
+    // },
 
-    replaceInstructions: function() {
-      if (this.isLargeMode()) {
-        this.$('.narrative__instruction-inner').html(this.model.get('instruction'));
-      } else if (this.model.get('mobileInstruction') && !this.model.get('_wasHotgraphic')) {
-        this.$('.narrative__instruction-inner').html(this.model.get('mobileInstruction'));
-      }
-    },
+    // replaceInstructions: function() {
+    //   if (this.isLargeMode()) {
+    //     this.$('.narrative__instruction-inner').html(this.model.get('instruction'));
+    //   } else if (this.model.get('mobileInstruction') && !this.model.get('_wasHotgraphic')) {
+    //     this.$('.narrative__instruction-inner').html(this.model.get('mobileInstruction'));
+    //   }
+    // },
 
-    replaceWithHotgraphic: function() {
-      if (!Adapt.componentStore.hotgraphic) throw "Hotgraphic not included in build";
-      var HotgraphicView = Adapt.componentStore.hotgraphic.view;
+    // replaceWithHotgraphic: function() {
+    //   if (!Adapt.componentStore.hotgraphic) throw "Hotgraphic not included in build";
+    //   var HotgraphicView = Adapt.componentStore.hotgraphic.view;
 
-      var model = this.prepareHotgraphicModel();
-      var newHotgraphic = new HotgraphicView({ model: model });
-      var $container = $(".component__container", $("." + this.model.get("_parentId")));
+    //   var model = this.prepareHotgraphicModel();
+    //   var newHotgraphic = new HotgraphicView({ model: model });
+    //   var $container = $(".component__container", $("." + this.model.get("_parentId")));
 
-      $container.append(newHotgraphic.$el);
-      this.remove();
-      $.a11y_update();
-      _.defer(function() {
-        Adapt.trigger('device:resize');
-      });
-    },
+    //   $container.append(newHotgraphic.$el);
+    //   this.remove();
+    //   $.a11y_update();
+    //   _.defer(function() {
+    //     Adapt.trigger('device:resize');
+    //   });
+    // },
 
-    prepareHotgraphicModel: function() {
-      var model = this.model;
-      model.resetActiveItems();
-      model.set({
-        '_isPopupOpen': false,
-        '_component': 'hotgraphic',
-        'body': model.get('originalBody'),
-        'instruction': model.get('originalInstruction')
-      });
+    // prepareHotgraphicModel: function() {
+    //   var model = this.model;
+    //   model.resetActiveItems();
+    //   model.set({
+    //     '_isPopupOpen': false,
+    //     '_component': 'hotgraphic',
+    //     'body': model.get('originalBody'),
+    //     'instruction': model.get('originalInstruction')
+    //   });
 
-      return model;
-    },
+    //   return model;
+    // },
 
     moveSliderToIndex: function(itemIndex) {
       var offset = this.model.get('_itemWidth') * itemIndex;
@@ -193,11 +194,11 @@ define([
       if (this._isInitial) return;
 
       var index = this.model.getActiveItem().get('_index');
-      if (this.isLargeMode()) {
+      // if (this.isLargeMode()) {
         this.$('.narrative__content-item[data-index="'+index+'"]').a11y_focus();
-      } else {
-        this.$('.narrative__strapline-btn').a11y_focus();
-      }
+      // } else {
+      //   this.$('.narrative__strapline-btn').a11y_focus();
+      // }
     },
 
     setStage: function(item) {
@@ -239,20 +240,20 @@ define([
       }
     },
 
-    openPopup: function(event) {
-      event && event.preventDefault();
+    // openPopup: function(event) {
+    //   event && event.preventDefault();
 
-      var currentItem = this.model.getActiveItem();
-      Adapt.trigger('notify:popup', {
-        title: currentItem.get('title'),
-        body: currentItem.get('body')
-      });
+    //   var currentItem = this.model.getActiveItem();
+    //   Adapt.trigger('notify:popup', {
+    //     title: currentItem.get('title'),
+    //     body: currentItem.get('body')
+    //   });
 
-      Adapt.on('popup:opened', function() {
-        // Set the visited attribute for small and medium screen devices
-        currentItem.toggleVisited(true);
-      });
-    },
+    //   Adapt.on('popup:opened', function() {
+    //     // Set the visited attribute for small and medium screen devices
+    //     currentItem.toggleVisited(true);
+    //   });
+    // },
 
     onNavigationClicked: function(event) {
       var stage = this.model.getActiveItem().get('_index');

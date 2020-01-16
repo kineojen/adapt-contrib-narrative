@@ -1,6 +1,6 @@
 .narrative {
   &__content {
-    display: none;
+    // display: none;
 
     @media (min-width: @device-width-medium) {
       display: block;
@@ -19,69 +19,69 @@
   // Strapline
   // Clickable element on mobile, opens notify
   // --------------------------------------------------
-  &__strapline {
-    position: relative;
+  // &__strapline {
+  //   position: relative;
 
-    @media (min-width: @device-width-medium) {
-      display: none;
-    }
-  }
+  //   @media (min-width: @device-width-medium) {
+  //     display: none;
+  //   }
+  // }
 
-  &__strapline-header {
-    position: relative;
-    overflow: hidden;
-  }
+  // &__strapline-header {
+  //   position: relative;
+  //   overflow: hidden;
+  // }
 
-  &__strapline-btn {
-    position: relative;
-    .u-float-left;
-    padding: 0;
-    outline-offset: -5px;
-  }
+  // &__strapline-btn {
+  //   position: relative;
+  //   .u-float-left;
+  //   padding: 0;
+  //   outline-offset: -5px;
+  // }
 
-  .ie &__strapline-btn:focus .focus-rect {
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    top: 5px;
-    left: 5px;
-    outline-color: highlight;
-    outline-style: solid;
-    outline-width: 3px;
-  }
+  // .ie &__strapline-btn:focus .focus-rect {
+  //   position: absolute;
+  //   right: 5px;
+  //   bottom: 5px;
+  //   top: 5px;
+  //   left: 5px;
+  //   outline-color: highlight;
+  //   outline-style: solid;
+  //   outline-width: 3px;
+  // }
 
-  &__strapline-title {
-    margin-right: @icon-size + (@item-padding * 2);
-    padding: @item-padding;
-    // Override button line height to match icon size
-    line-height: @icon-size;
+  // &__strapline-title {
+  //   margin-right: @icon-size + (@item-padding * 2);
+  //   padding: @item-padding;
+  //   // Override button line height to match icon size
+  //   line-height: @icon-size;
 
-    .dir-rtl & {
-      margin-right: inherit;
-      margin-left: @icon-size + (@item-padding * 2);
-    }
-  }
+  //   .dir-rtl & {
+  //     margin-right: inherit;
+  //     margin-left: @icon-size + (@item-padding * 2);
+  //   }
+  // }
 
-  &__strapline-title-inner {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  // &__strapline-title-inner {
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   white-space: nowrap;
+  // }
 
-  &__strapline-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
+  // &__strapline-icon {
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
 
-    .dir-rtl & {
-      right: inherit;
-      left: 0;
-    }
-  }
+  //   .dir-rtl & {
+  //     right: inherit;
+  //     left: 0;
+  //   }
+  // }
 
-  &__strapline-icon .icon {
-    .icon-plus;
-  }
+  // &__strapline-icon .icon {
+  //   .icon-plus;
+  // }
   // --------------------------------------------------
 
   // --------------------------------------------------
